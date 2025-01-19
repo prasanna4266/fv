@@ -77,6 +77,13 @@ app.get('/login', (req, res) => {
 app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html')); // Serve the index.html file
 });
+app.get('/fruits', (req, res) => {
+    res.render("fruits");
+});
+app.get('/products', (req, res) => {
+    res.render("products");
+});
+
 // Registration route
 app.post('/register', async (req, res) => {
     const { firstName, lastName, email, contactNumber, password, confirmPassword } = req.body;
@@ -148,7 +155,7 @@ function isAuthenticated(req, res, next) {
 }
 
 // Define routes
-app.get('/products',isAuthenticated, async (req, res) => {
+app.get('/products', async (req, res) => {
     try {
         const products = await Product.find(); // Fetch products from the database
         if (!products || products.length === 0) {
