@@ -20,7 +20,7 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const Cart = require('./cart');
 const { error } = require('console');
-app.set('views', path.join(__dirname, '../views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('public', path.join(__dirname, 'public'));
 app.set('view engine', 'ejs');
 const PORT = 3000;
@@ -81,7 +81,7 @@ app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html')); // Serve the index.html file
 });
 app.get('/fruits', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'fruits.ejs')); // Serve the index.html file
+  res.sendFile(path.join(__dirname, 'views', 'fruits')); // Serve the index.html file
 });
 app.get('/products', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'products.ejs')); // Serve the index.html file
