@@ -23,6 +23,7 @@ const { error } = require('console');
 app.set('views', path.join(__dirname, 'views'));
 app.set('public', path.join(__dirname, 'public'));
 app.set('view engine', 'ejs');
+console.log('Views directory set to:', app.get('views'));
 const PORT = 3000;
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 app.use(cors());
@@ -79,12 +80,6 @@ app.get('/login', (req, res) => {
 });
 app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html')); // Serve the index.html file
-});
-app.get('/fruits', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'fruits')); // Serve the index.html file
-});
-app.get('/products', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'products.ejs')); // Serve the index.html file
 });
 app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'profile.ejs')); // Serve the index.html file
