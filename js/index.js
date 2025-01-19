@@ -82,7 +82,7 @@ app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html')); // Serve the index.html file
 });
 app.get('/profile', (req, res) => {
-  res.sendFile(path.join(__dirname, 'views', 'profile.ejs')); // Serve the index.html file
+  res.render('profile'); // Serve the index.html file
 });
 
 // Registration route
@@ -110,7 +110,7 @@ app.post('/register', async (req, res) => {
         await newUser.save();
         
         // Redirect to login page after successful registration
-        return res.sendFile(path.join(__dirname, '/public/products.html')); // Ensure this is the final response
+        return res.redirect('products'); // Ensure this is the final response
     } catch (err) {
         console.error('Error in registering user:', err);  // Log the specific error
         res.status(500).send('Internal Server Error');
