@@ -85,11 +85,11 @@ app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'profile.ejs')); // Serve the index.html file
 });
 app.get('/fruits', (req, res) => {
-    res.render('fruits', title : Fruits Page); // Renders views/fruits.ejs
+    res.render('fruits.ejs'); // Renders views/fruits.ejs
 });
 
 app.get('/products', (req, res) => {
-    res.render('products', title : Vegetables Page); // Renders views/products.ejs
+    res.render('products'); // Renders views/products.ejs
 });
 
 // Registration route
