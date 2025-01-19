@@ -20,10 +20,9 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const Cart = require('./cart');
 const { error } = require('console');
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views'));
 app.set('public', path.join(__dirname, 'public'));
-
+app.set('view engine', 'ejs');
 const PORT = 3000;
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
 app.use(cors());
@@ -89,6 +88,13 @@ app.get('/products', (req, res) => {
 });
 app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'profile.ejs')); // Serve the index.html file
+});
+app.get('/fruits', (req, res) => {
+    res.render('fruits'); // Renders views/fruits.ejs
+});
+
+app.get('/products', (req, res) => {
+    res.render('products'); // Renders views/products.ejs
 });
 
 // Registration route
