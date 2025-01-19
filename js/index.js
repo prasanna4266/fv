@@ -62,6 +62,10 @@ mongoose.connect('mongodb+srv://prasannabollineni2:bollineni4266@cluster0.ngdtd.
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html')); // Serve the index.html file
 });
+app.get('/home', (req, res) => {
+    res.render("/");
+});
+
 app.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'contact.html')); // Serve the index.html file
 });
@@ -82,6 +86,9 @@ app.get('/fruits', (req, res) => {
 });
 app.get('/products', (req, res) => {
     res.render("products");
+});
+app.get('/profile', (req, res) => {
+    res.render("profile");
 });
 
 // Registration route
