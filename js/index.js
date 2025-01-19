@@ -84,13 +84,6 @@ app.get('/register', (req, res) => {
 app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'profile.ejs')); // Serve the index.html file
 });
-app.get('/fruits', (req, res) => {
-    res.render('fruits'); // Renders views/fruits.ejs
-});
-
-app.get('/products', (req, res) => {
-    res.render('products'); // Renders views/products.ejs
-});
 
 // Registration route
 app.post('/register', async (req, res) => {
