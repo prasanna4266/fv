@@ -82,13 +82,13 @@ app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html')); // Serve the index.html file
 });
 app.get('/fruits', (req, res) => {
-    res.render("fruits");
+  res.sendFile(path.join(__dirname, 'views', 'fruits.ejs')); // Serve the index.html file
 });
 app.get('/products', (req, res) => {
-    res.render("products");
+  res.sendFile(path.join(__dirname, 'views', 'products.ejs')); // Serve the index.html file
 });
 app.get('/profile', (req, res) => {
-    res.render("profile");
+  res.sendFile(path.join(__dirname, 'views', 'profile.ejs')); // Serve the index.html file
 });
 
 // Registration route
