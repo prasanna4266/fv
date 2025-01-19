@@ -20,7 +20,7 @@ const bcrypt = require('bcrypt');
 const session = require('express-session');
 const Cart = require('./cart');
 const { error } = require('console');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '../views'));
 app.set('public', path.join(__dirname, 'public'));
 app.set('view engine', 'ejs');
 console.log('Views directory set to:', app.get('views'));
@@ -85,7 +85,7 @@ app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname, 'views', 'profile.ejs')); // Serve the index.html file
 });
 app.get('/fruits', (req, res) => {
-    res.render('fruits.ejs'); // Renders views/fruits.ejs
+    res.render('fruits'); // Renders views/fruits.ejs
 });
 
 app.get('/products', (req, res) => {
