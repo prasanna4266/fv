@@ -626,6 +626,7 @@ app.post('/checkout', async (req, res) => {
 });
 
 app.get('/order-confirmation', (req, res) => {
+    const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const orderDetails = req.session.orderDetails;
 
 
