@@ -59,7 +59,6 @@ mongoose.connect('mongodb+srv://prasannabollineni2:bollineni4266@cluster0.ngdtd.
     console.error('Connection error:', err.message);
 });
 app.use(express.static('public'));
-app.set('views', __dirname + '/views');
 
 app.get('/', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
