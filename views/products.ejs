@@ -36,28 +36,27 @@
                     <div class="product-info">
                         <h3><%= product.name %></h3>
                         <p><%= product.description %></p>
-                        <p><strong>Regular Price:</strong> ₹<%= product.regprice %></p>
-                        <p><strong>Price:</strong> ₹<%= product.ourprice %></p>
+                        <p><strong>Regular Price:</strong> ₹<%= product.regprice %>/kg</p>
                         <p>Max Quantity: <%= product.maxquantity %></p>
                         <!-- Display subscription options -->
                         <div class="subscription-options">
                             <% if (product['3mnths'] && product['3mnths'] > 0) { %>
                                 <button onclick="confirmSubscription('<%- product._id %>', '3 Months', <%- product['3mnths'] %>)">
-                                    3 Months - ₹<%= product['3mnths'] %>
+                                    3 Months - ₹<%= product['3mnths'] %>/kg
                                 </button>
                                     <% } else { %>
                                 <p>No subscription option for 3 months</p>
                             <% } %>
                             <% if (product['6mnths']) { %>
                                 <button onclick="confirmSubscription('<%- product._id %>', '6 Months', <%- product['6mnths'] %>)">
-                                    6 Months - ₹<%= product['6mnths'] %>
+                                    6 Months - ₹<%= product['6mnths'] %>/kg
                                 </button>
                                     <% } else { %>
                                 <p>No subscription option for 6 months</p>
                             <% } %>
                             <% if (product['1year']) { %>
                                 <button onclick="confirmSubscription('<%- product._id %>', '1 Year', <%- product['1year'] %>)">
-                                    1 Year - ₹<%= product['1year'] %>
+                                    1 Year - ₹<%= product['1year'] %>/kg
                                 </button>
                                 <% } else { %>
                                 <p>No subscription option for 1 year</p>
