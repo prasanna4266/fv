@@ -60,8 +60,13 @@ mongoose.connect('mongodb+srv://prasannabollineni2:bollineni4266@cluster0.ngdtd.
     console.error('Connection error:', err.message);
 });
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html')); // Serve the index.html file
+    const isLoggedIn = req.session.user ? true : false; // Example using session
+    res.render('index', { isLoggedIn });
 });
+
+/*app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html')); // Serve the index.html file
+});*/
 app.get('/home', (req, res) => {
     res.render("/");
 });
