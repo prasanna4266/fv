@@ -61,18 +61,18 @@ p a:hover {
                 <span class="bar"></span> 
             </button>
             <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">Products</a></li>
-                <li><a href="careers.html">Careers</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="faqs.html">FAQs</a></li>
-           <% if (isLoggedIn) { %>
+            <li><a href="/">Home</a></li>
+            <li><a href="/cats">Products</a></li>
+            <li><a href="/careers">Careers</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/faqs">FAQs</a></li>
+            <% if (isLoggedIn) { %>
                 <li><a href="/profile">Profile</a></li>
                 <li><a href="/active-subscriptions">Active Subscriptions</a></li>
             <% } else { %>
                 <li><a href="/login">Login</a></li>
             <% } %>
-            </ul>
+        </ul>
         </div>
     </nav>
     <header>
