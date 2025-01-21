@@ -152,7 +152,7 @@ app.post('/login', async (req, res) => {
         req.session.userId = user._id;
           // Check if there's a redirect URL from the login page
           const redirectUrl = req.query.redirect || '/';  // Default to home page if no redirect URL is provided
-            return res.redirect('/home');
+            return res.redirect('/');
         } catch (err) {
         console.error('Error during login:', err);
         return res.status(500).send('Internal Server Error');
