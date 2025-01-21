@@ -159,13 +159,12 @@ app.post('/login', async (req, res) => {
     }
 });
 
-function isAuthenticated(req, res, next) {
-    if (req.session.user) {
-        return next(); // Proceed to the next middleware or route handler
+function checkAuthentication(req, res, next) {
+    if (req.session && req.session.userId) {
+        next();
+    } else {
+        res.redirect('/login');
     }
-
-    // If the user is not authenticated, redirect them to the login page with the original URL
-    res.redirect(`/login?redirect=${encodeURIComponent(req.originalUrl)}`);
 }
 
 // Define routes
@@ -268,7 +267,7 @@ module.exports = router;
 
 
 // Route for profile page
-app.get('/profile', async (req, res) => {
+app.get('/profile', checkAuthentication, async (req, res) => {
     const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const userId = req.session.userId; // Assuming you're storing user ID in session
 
