@@ -265,7 +265,7 @@ router.post('/subscribe', async (req, res) => {
     });
 module.exports = router;
 
-app.post('/profile, async (req, res) => {
+app.post('/profile', async (req, res) => {
          const userId = req.session.userId;
      if (!userId) {
         return res.redirect('/login'); // Redirect to login if user is not logged in
