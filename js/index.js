@@ -64,9 +64,6 @@ app.get('/', (req, res) => {
     res.render('index', { isLoggedIn });
 });
 
-/*app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html')); // Serve the index.html file
-});*/
 app.get('/home', (req, res) => {
     res.render("/");
 });
