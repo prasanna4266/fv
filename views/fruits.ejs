@@ -51,6 +51,14 @@
             </div>
         <% }); %>
     </div>
+<div id="confirmationModal" class="modal">
+            <div class="modal-content">
+                <p id="confirmationMessage"></p>
+                <button id="confirmButton" class="btn">Yes, Confirm</button>
+                <button onclick="closeModal()" class="btn">Cancel</button>
+            </div>
+        </div>
+
 
 </main>
 <footer class="footer">
@@ -84,6 +92,21 @@
 
 
 <script>
+// Function to show confirmation modal for subscription
+        function confirmSubscription(productId, duration, price) {
+            const message = `Do you want to subscribe for ${duration} at ₹${price}?`;
+            document.getElementById("confirmationMessage").textContent = message;
+            document.getElementById("confirmationModal").style.display = "flex";
+            
+            document.getElementById("confirmButton").onclick = function() {
+                window.location.href = `/subscription-details?productId=${productId}&duration=${duration}`;
+            };
+        }
+
+        // Function to close the modal
+        function closeModal() {
+            document.getElementById("confirmationModal").style.display = "none";
+        }
 // Fetch product details and subscription plans
 function fetchProductDetails() {
     fetch('/get-fruits')
