@@ -62,26 +62,27 @@ app.get('/', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
     res.render('index', { isLoggedIn });
 });
-app.use(express.static('public')); // Adjust 'public' to your folder name
 
 app.get('/home', (req, res) => {
     res.render("/");
 });
-
+app.get('/cats', (req, res) => {
+    res.render('/cats');
+});
 app.get('/contact', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'contact.html')); // Serve the index.html file
+  res.render('contact');
 });
 app.get('/careers', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'careers.html')); // Serve the index.html file
+  res.render('careers');
 });
 app.get('/faqs', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'faqs.html')); // Serve the index.html file
+  res.render('faqs');
 });
 app.get('/login', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'login.html')); // Serve the index.html file
+  res.render('login');
 });
 app.get('/register', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'register.html')); // Serve the index.html file
+  res.render('register');
 });
 app.get('/profile', (req, res) => {
   res.render('profile'); // Serve the index.html file
