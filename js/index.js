@@ -158,7 +158,16 @@ app.post('/login', async (req, res) => {
         return res.status(500).send('Internal Server Error');
     }
 });
-
+// Logout route
+app.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Error logging out:', err);
+            return res.status(500).send('Failed to log out.');
+        }
+        res.redirect('/login'); // Redirect to the login page or homepage after logout
+    });
+});
 function checkAuthentication(req, res, next) {
     if (req.session && req.session.userId) {
         next();
