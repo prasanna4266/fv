@@ -568,7 +568,6 @@ app.get('/order', (req, res) => {
         });
 });
 app.post('/order', (req, res) => {
-    const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const { productId, price } = req.body;
     console.log("Product ID:", productId);
     console.log("Price:", price); // Log to verify the price
@@ -580,6 +579,7 @@ app.post('/order', (req, res) => {
     res.redirect('/checkout');
 });
 app.get('/checkout', (req, res) => {
+    const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const orderDetails = req.session.orderDetails;
 
     if (!orderDetails) {
