@@ -269,6 +269,7 @@ module.exports = router;
 
 // Route for profile page
 app.get('/profile', async (req, res) => {
+    const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const userId = req.session.userId; // Assuming you're storing user ID in session
 
     if (!userId) {
@@ -284,7 +285,7 @@ app.get('/profile', async (req, res) => {
         }
 
         // Render profile page and pass the user data to the view
-        res.render('profile', { user });
+        res.render('profile', { user , isLoggedIn });
     } catch (error) {
         console.error('Error fetching user profile:', error);
         res.status(500).send('Failed to fetch profile');
@@ -297,6 +298,7 @@ app.get('/profile', async (req, res) => {
 //for fruits
 app.get('/subscription-details', async (req, res) => {
     try {
+        const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
         const { productId, duration } = req.query;
         const userId = req.session.userId;
 
@@ -352,7 +354,7 @@ app.get('/subscription-details', async (req, res) => {
         });
 
         await newSubscription.save();
-        res.status(201).render('subscription-details', { user: req.session.user, product, duration });
+        res.status(201).render('subscription-details', { user: req.session.user, product, duration ,isLoggedIn});
     } catch (error) {
         console.error('Error fetching subscription details:', error);
         res.status(500).json({ message: 'Failed to add subscription', error });
@@ -362,6 +364,7 @@ app.get('/subscription-details', async (req, res) => {
 //for vegetables
 app.get('/subscription-details1', async (req, res) => {
     try {
+        const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
         const { productId, duration } = req.query;
         const userId = req.session.userId;
 
@@ -417,7 +420,7 @@ app.get('/subscription-details1', async (req, res) => {
         });
 
         await newSubscription.save();
-        res.status(201).render('subscription-details', { user: req.session.user, product, duration });
+        res.status(201).render('subscription-details', { user: req.session.user, product, duration ,isLoggedIn});
     } catch (error) {
         console.error('Error fetching subscription details:', error);
         res.status(500).json({ message: 'Failed to add subscription', error });
@@ -486,6 +489,7 @@ app.post('/subscription-details1', async (req, res) => {
 });
 
 app.get('/active-subscriptions', async (req, res) => {
+    const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const userId = req.session.userId; // Assuming session holds the user's ID
 
     try {
@@ -493,13 +497,14 @@ app.get('/active-subscriptions', async (req, res) => {
             .populate('productId','price') // Populate product details
             .exec();
 
-        res.render('active-subscriptions', { subscriptions });
+        res.render('active-subscriptions', { subscriptions ,isLoggedIn});
     } catch (error) {
         console.error(error);
         res.status(500).send('Failed to fetch subscriptions');
     }
 });
 app.get('/cart', async (req, res) => {
+    const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const userId = req.session.userId;
     if (!userId) {
         return res.redirect('/login'); // Redirect to login if not logged in
@@ -511,7 +516,7 @@ app.get('/cart', async (req, res) => {
             return res.render('cart', { cart: { items: [] } }); // Render empty cart if none exists
         }
 
-        res.render('cart', { cart });
+        res.render('cart', { cart ,isLoggedIn});
     } catch (err) {
         console.error('Error fetching cart:', err);
         res.status(500).send('An error occurred while fetching the cart');
@@ -541,6 +546,7 @@ app.post('/cart/update', async (req, res) => {
 
 // Route for rendering the order page
 app.get('/order', (req, res) => {
+    const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const userId = req.session.userId;
     if (!userId) {
         return res.redirect('/login'); // Ensure user is logged in
@@ -558,10 +564,11 @@ app.get('/order', (req, res) => {
                 return res.redirect('/cart'); // If cart is empty, redirect to cart page
             }
 
-            res.render('order', { cart }); // Render the order page with cart items
+            res.render('order', { cart ,isLoggedIn}); // Render the order page with cart items
         });
 });
 app.post('/order', (req, res) => {
+    const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const { productId, price } = req.body;
     console.log("Product ID:", productId);
     console.log("Price:", price); // Log to verify the price
@@ -579,10 +586,11 @@ app.get('/checkout', (req, res) => {
         return res.redirect('/active-subscriptions'); // Redirect if no order details
     }
 
-    res.render('checkout', { orderDetails });
+    res.render('checkout', { orderDetails ,isLoggedIn});
 });
 
 app.post('/checkout', async (req, res) => {
+    const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const { name, address, phonenum, quantity } = req.body;
     const { productId, price } = req.session.orderDetails;
 
@@ -625,7 +633,7 @@ app.get('/order-confirmation', (req, res) => {
         return res.redirect('/active-subscriptions'); // Redirect if no order details found
     }
 
-    res.render('order-confirmation', { orderDetails });
+    res.render('order-confirmation', { orderDetails ,isLoggedIn});
 });
 
 app.post('/checkout/:productId', (req, res) => {
@@ -642,6 +650,7 @@ app.post('/checkout/:productId', (req, res) => {
 
 // Checkout route
 app.get('/checkout', (req, res) => {
+    const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const selectedProducts = req.session.comboProducts || [];
     const userId = req.session.userId;
     if (!userId) {
@@ -649,7 +658,7 @@ app.get('/checkout', (req, res) => {
     }
 
     // You can fetch cart and checkout data, and render the checkout page
-    res.render('checkout'); // Render your checkout page
+    res.render('checkout', {isLoggedIn}); // Render your checkout page
 });
 //veges
 app.post('/add-combo-to-cart', async (req, res) => {
@@ -784,6 +793,7 @@ app.post('/add-combo-to-cart1', async (req, res) => {
 });
 // Serve the combo selection page (ensure this is added)
 app.get('/combo-selection', async (req, res) => {
+    const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const { products, durations } = req.body; // Extract product IDs and subscription durations
     let selectedProducts = [];  // Initialize empty array for selected products
     try {
@@ -794,7 +804,7 @@ app.get('/combo-selection', async (req, res) => {
         console.error('Error fetching products:', error);
         res.render('combo-selection',{ products: [] });
     }
-    res.render('combo-selection'); // Render the EJS page for combo selection
+    res.render('combo-selection',{isLoggedIn}); // Render the EJS page for combo selection
 });
 
 
