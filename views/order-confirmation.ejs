@@ -40,6 +40,11 @@
         button:hover {
             background-color: #218838;
         }
+
+/* Specific button for back navigation */
+.back-button {
+    margin-top: 20px; /* Add some spacing if needed */
+}
     </style>
 </head>
 <body>
@@ -52,7 +57,7 @@
         <p><strong>Name:</strong> <%= orderDetails.name %></p>
         <p><strong>Address:</strong> <%= orderDetails.address %></p>
     </div>
-    <a href="/active-subscriptions" class="btn">Back to Subscriptions</a>
+<a href="/active-subscriptions" class="btn back-button">Back to Subscriptions</a>
 </main>
 <footer class="footer">
     <div class="footer-container">
