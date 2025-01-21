@@ -58,6 +58,8 @@ mongoose.connect('mongodb+srv://prasannabollineni2:bollineni4266@cluster0.ngdtd.
 .catch((err) => {
     console.error('Connection error:', err.message);
 });
+app.use(express.static('public'));
+
 app.get('/', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
     res.render('index', { isLoggedIn });
