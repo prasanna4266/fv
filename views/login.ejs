@@ -66,7 +66,12 @@ p a:hover {
                 <li><a href="careers.html">Careers</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="faqs.html">FAQs</a></li>
-                <li><a href="login.html">Login</a></li>
+           <% if (isLoggedIn) { %>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/active-subscriptions">Active Subscriptions</a></li>
+            <% } else { %>
+                <li><a href="/login">Login</a></li>
+            <% } %>
             </ul>
         </div>
     </nav>
