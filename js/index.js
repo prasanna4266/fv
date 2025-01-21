@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
 
 app.get('/home', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
-    res.render('/', { isLoggedIn });
+    res.render('index', { isLoggedIn });
 });
 app.get('/cats', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
