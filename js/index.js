@@ -171,11 +171,12 @@ function isAuthenticated(req, res, next) {
 // Define routes
 app.get('/products', async (req, res) => {
     try {
+        const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
         const products = await Product.find(); // Fetch products from the database
         if (!products || products.length === 0) {
             throw new Error('No products found'); // Handle empty database
         }
-        res.render('products', { products }); // Pass products to the EJS file
+        res.render('products', { products, isLoggedIn }); // Pass both products and isLoggedIn to the EJS file
     } catch (err) {
         console.error('Error fetching products:', err);
         res.status(500).send('Error fetching products');
@@ -184,11 +185,12 @@ app.get('/products', async (req, res) => {
 // Define routes
 app.get('/fruits', async (req, res) => {
     try {
+        const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
         const fruits = await Fruits.find(); // Fetch products from the database
         if (!fruits || fruits.length === 0) {
             throw new Error('No fruits found'); // Handle empty database
         }
-        res.render('fruits', { fruits }); // Pass products to the EJS file
+        res.render('fruits', { fruits, isLoggedIn }); // Pass both products and isLoggedIn to the EJS file
     } catch (err) {
         console.error('Error fetching fruits:', err);
         res.status(500).send('Error fetching fruits');
