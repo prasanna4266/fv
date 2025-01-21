@@ -68,6 +68,13 @@
         .btn-link:hover {
             background: #2c3e50;
         }
+        .btn-logout {
+            background: #e74c3c;
+        }
+
+        .btn-logout:hover {
+            background: #c0392b;
+        }
     </style>
 </head>
 <body>
@@ -86,7 +93,11 @@
         </div>
 
         <!-- Optionally, provide a link to update profile -->
-        <li><a href="/active-subscriptions">Active Subscriptions</a></li>
+        <div class="button-group">
+            <form action="/logout" method="POST" style="display: inline;">
+                <button type="submit" class="btn-link btn-logout">Logout</button>
+            </form>
+        </div>
     </main>
 
     <footer class="footer">
