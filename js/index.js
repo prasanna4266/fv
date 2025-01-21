@@ -59,6 +59,7 @@ mongoose.connect('mongodb+srv://prasannabollineni2:bollineni4266@cluster0.ngdtd.
     console.error('Connection error:', err.message);
 });
 app.use(express.static('public'));
+app.set('views', __dirname + '/views');
 
 app.get('/', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
@@ -66,19 +67,24 @@ app.get('/', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-    res.render("/");
+    const isLoggedIn = req.session.user ? true : false; // Example using session
+    res.render('/', { isLoggedIn });
 });
 app.get('/cats', (req, res) => {
-    res.render('/cats');
+    const isLoggedIn = req.session.user ? true : false; // Example using session
+    res.render('/cats', { isLoggedIn });
 });
 app.get('/contact', (req, res) => {
-  res.render('contact');
+    const isLoggedIn = req.session.user ? true : false; // Example using session
+    res.render('contact', { isLoggedIn });
 });
 app.get('/careers', (req, res) => {
-  res.render('careers');
+    const isLoggedIn = req.session.user ? true : false; // Example using session
+    res.render('careers', { isLoggedIn });
 });
 app.get('/faqs', (req, res) => {
-  res.render('faqs');
+    const isLoggedIn = req.session.user ? true : false; // Example using session
+    res.render('faqs', { isLoggedIn });
 });
 app.get('/login', (req, res) => {
   res.render('login');
@@ -87,7 +93,8 @@ app.get('/register', (req, res) => {
   res.render('register');
 });
 app.get('/profile', (req, res) => {
-  res.render('profile'); // Serve the index.html file
+    const isLoggedIn = req.session.user ? true : false; // Example using session
+    res.render('profile', { isLoggedIn });
 });
 
 // Registration route
