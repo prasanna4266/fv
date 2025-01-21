@@ -36,28 +36,27 @@
                 <div class="product-info">
                     <h3><%= fruit.name %></h3>
                     <p><%= fruit.description || 'No description available.' %></p>
-                    <p><strong>Regular Price:</strong> ₹<%= fruit.regprice %></p>
-                    <p><strong>Our Price:</strong> ₹<%= fruit.ourprice %></p>
+                    <p><strong>Regular Price:</strong> ₹<%= fruit.regprice %>/kg</p>
                     <p>Max Quantity: <%= fruit.maxquantity %></p>
                         <!-- Display subscription options -->
                         <div class="subscription-options">
                             <% if (fruit['3mnths'] && fruit['3mnths'] > 0) { %>
                                 <button onclick="confirmSubscription('<%- fruit._id %>', '3 Months', <%- fruit['3mnths'] %>)">
-                                    3 Months - ₹<%= fruit['3mnths'] %>
+                                    3 Months - ₹<%= fruit['3mnths'] %>/kg
                                 </button>
                                     <% } else { %>
                                 <p>No subscription option for 3 months</p>
                             <% } %>
                             <% if (fruit['6mnths']) { %>
                                 <button onclick="confirmSubscription('<%- fruit._id %>', '6 Months', <%- fruit['6mnths'] %>)">
-                                    6 Months - ₹<%= fruit['6mnths'] %>
+                                    6 Months - ₹<%= fruit['6mnths'] %>/kg
                                 </button>
                                     <% } else { %>
                                 <p>No subscription option for 6 months</p>
                             <% } %>
                             <% if (fruit['1year']) { %>
                                 <button onclick="confirmSubscription('<%- fruit._id %>', '1 Year', <%- fruit['1year'] %>)">
-                                    1 Year - ₹<%= fruit['1year'] %>
+                                    1 Year - ₹<%= fruit['1year'] %>/kg
                                 </button>
                                 <% } else { %>
                                 <p>No subscription option for 1 year</p>
