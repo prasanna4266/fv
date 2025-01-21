@@ -24,6 +24,12 @@
             <li><a href="contact.html">Contact</a></li>
             <li><a href="faqs.html">FAQs</a></li>
             <li class="dynamic-links"></li>
+             <% if (isLoggedIn) { %>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/active-subscriptions">Active Subscriptions</a></li>
+            <% } else { %>
+                <li><a href="login.html">Login</a></li>
+            <% } %>
         </ul>
     </div>
 </nav>
