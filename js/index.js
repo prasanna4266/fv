@@ -71,7 +71,7 @@ app.get('/home', (req, res) => {
 });
 app.get('/cats', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
-    res.render('/cats', { isLoggedIn });
+    res.render('cats', { isLoggedIn });
 });
 app.get('/contact', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
