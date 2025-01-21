@@ -91,8 +91,13 @@ app.get('/register', (req, res) => {
 });
 app.get('/profile', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
-    res.render('profile', { isLoggedIn });
+    const user = req.session.user; // Assuming user details are stored in session
+    if (!user) {
+        return res.redirect('/login'); // Redirect to login if not logged in
+    }
+    res.render('profile', { user ,isLoggedIn});
 });
+
 app.get('/login', (req, res) => {
     const isLoggedIn = req.session.user ? true : false;
     res.render('login', { isLoggedIn });
