@@ -86,10 +86,14 @@
 
         <!-- Display profile details -->
         <div class="profile-info">
+            <% if (user) { %>
             <p><strong>Name:</strong> <%= user.firstName %></p>
             <p><strong>Email:</strong> <%= user.email %></p>
             <p><strong>Phone Number:</strong> <%= user.contactNumber %></p>
             <!-- Add any other relevant user info -->
+            <% } else { %>
+                    <h2>Welcome, Guest!</h2>
+             <% } %>
         </div>
 
         <!-- Optionally, provide a link to update profile -->
