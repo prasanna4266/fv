@@ -110,7 +110,7 @@ app.post('/register', async (req, res) => {
         await newUser.save();
         
         // Redirect to login page after successful registration
-        return res.redirect('products'); // Ensure this is the final response
+        return res.redirect('/home'); // Ensure this is the final response
     } catch (err) {
         console.error('Error in registering user:', err);  // Log the specific error
         res.status(500).send('Internal Server Error');
