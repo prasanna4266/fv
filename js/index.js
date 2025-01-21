@@ -288,7 +288,7 @@ app.post('/profile, async (req, res) => {
 });
          
 // Route for profile page
-app.get('/profile, async (req, res) => {
+app.get('/profile', async (req, res) => {
     const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
     const userId = req.session.userId; // Assuming you're storing user ID in session
 
