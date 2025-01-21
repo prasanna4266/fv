@@ -85,9 +85,7 @@ app.get('/faqs', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
     res.render('faqs', { isLoggedIn });
 });
-app.get('/login', (req, res) => {
-  res.render('login');
-});
+
 app.get('/register', (req, res) => {
   res.render('register');
 });
