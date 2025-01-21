@@ -46,7 +46,6 @@ app.use((req, res, next) => {
     }
     next();
 });
-app.use(express.static('public')); // Adjust 'public' to your folder name
 mongoose.connect('mongodb+srv://prasannabollineni2:bollineni4266@cluster0.ngdtd.mongodb.net/mysite?retryWrites=true&w=majority&appName=Cluster0', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -63,6 +62,7 @@ app.get('/', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
     res.render('index', { isLoggedIn });
 });
+app.use(express.static('public')); // Adjust 'public' to your folder name
 
 app.get('/home', (req, res) => {
     res.render("/");
