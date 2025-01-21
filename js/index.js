@@ -93,6 +93,10 @@ app.get('/profile', (req, res) => {
     const isLoggedIn = req.session.user ? true : false; // Example using session
     res.render('profile', { isLoggedIn });
 });
+app.get('/login', (req, res) => {
+    const isLoggedIn = req.session.user ? true : false;
+    res.render('login', { isLoggedIn });
+});
 
 // Registration route
 app.post('/register', async (req, res) => {
