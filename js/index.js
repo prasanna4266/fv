@@ -264,28 +264,6 @@ router.post('/subscribe', async (req, res) => {
         }
     });
 module.exports = router;
-
-app.post('/profile', async (req, res) => {
-         const userId = req.session.userId;
-     if (!userId) {
-        return res.redirect('/login'); // Redirect to login if user is not logged in
-    }
-
-    try {
-        // Fetch the user's profile from the database using userId
-        const user = await User.findById(userId).exec();
-
-        if (!user) {
-            return res.status(404).send('User not found');
-        }
-
-        // Render profile page and pass the user data to the view
-        res.render('profile', { user: req.session.user});
-    } catch (error) {
-        console.error('Error fetching user profile:', error);
-        res.status(500).send('Failed to fetch profile');
-    }
-});
          
 // Route for profile page
 app.get('/profile', async (req, res) => {
@@ -305,7 +283,7 @@ app.get('/profile', async (req, res) => {
         }
 
         // Render profile page and pass the user data to the view
-        res.render('profile', { user , isLoggedIn });
+        res.render('profile', { user: req.session.user , isLoggedIn });
     } catch (error) {
         console.error('Error fetching user profile:', error);
         res.status(500).send('Failed to fetch profile');
