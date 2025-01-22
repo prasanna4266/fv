@@ -50,6 +50,38 @@
     background: rgba(0, 0, 0, 0.4);
     z-index: 999;
 }
+#center-notification {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    width: 300px;
+}
+
+#center-notification.hidden {
+    display: none;
+}
+
+.center-notification-content button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.center-notification-content button:hover {
+    background-color: #218838;
+}
 </style>
 </head>
 <body>
@@ -134,7 +166,12 @@
     </div>
 </div>
 
-
+<div id="center-notification" class="hidden">
+    <div class="center-notification-content">
+        <p id="center-notification-message"></p>
+        <button onclick="closeCenterNotification()">OK</button>
+    </div>
+</div>
 <script>
 // Fetch product details and subscription plans
 function fetchProductDetails() {
@@ -229,6 +266,22 @@ function confirmAction() {
 
 // Fetch product details on page load
 window.onload = fetchProductDetails;
+function showCenterNotification(message) {
+    const notificationBox = document.getElementById('center-notification');
+    const notificationMessage = document.getElementById('center-notification-message');
+
+    notificationMessage.innerText = message;
+    notificationBox.classList.remove('hidden');
+}
+
+// Function to close the notification
+function closeCenterNotification() {
+    const notificationBox = document.getElementById('center-notification');
+    notificationBox.classList.add('hidden');
+}
+
+// Example usage
+showCenterNotification("You already have an active subscription for this product.");
 </script>
 </body>
 </html>
