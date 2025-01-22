@@ -313,6 +313,12 @@ app.get('/subscription-details', async (req, res) => {
         const isLoggedIn = req.session && req.session.user ? true : false; // Check if the user is logged in
         const { productId, duration } = req.query;
         const userId = req.session.userId;
+        const canSubscribe = await Subscription.checkSubscription(userId, productId);
+
+        if (!canSubscribe) {
+            return res.status(400).json({ message: 'You already have an active subscription for this product.' });
+        }
+
 
         if (!userId || !productId || !duration) {
             return res.status(400).json({ message: 'Missing required parameters' });
@@ -447,6 +453,12 @@ app.post('/subscription-details', async (req, res) => {
     console.log('Normalized Duration:', normalizedDuration);
 
     try {
+        const canSubscribe = await Subscription.checkSubscription(userId, productId);
+
+        if (!canSubscribe) {
+            return res.status(400).json({ message: 'You already have an active subscription for this product.' });
+        }
+
         // Fetch the product details from the database
         const product = await Fruits.findById(productId);
         if (!product) {
