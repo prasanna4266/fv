@@ -10,6 +10,15 @@ const subscriptionSchema = new mongoose.Schema({
     description: { type: String, required: false }, // Ensure this is correct
     productName: { type: String, required: true }, // Ensure this is correct
 });
+subscriptionSchema.statics.checkSubscription = async function (userId, productId) {
+    const existingSubscription = await this.findOne({
+        userId: userId,
+        productId: productId,
+        endDate: { $gte: new Date() }, // Active if endDate is in the future
+    });
+
+    return !existingSubscription; // Return true if no active subscription, false otherwise
+};
 
 const Subscription = mongoose.model('Subscription', subscriptionSchema);
 
