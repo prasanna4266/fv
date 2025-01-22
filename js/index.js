@@ -316,7 +316,7 @@ app.get('/subscription-details', async (req, res) => {
         const canSubscribe = await Subscription.checkSubscription(userId, productId);
 
         if (!canSubscribe) {
-            return res.json({message:'You already have an active subscription for this product.'});
+            return res.send('You already have an active subscription for this product.');
         }
 
 
