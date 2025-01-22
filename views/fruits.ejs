@@ -7,7 +7,50 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="/css/footer.css">
+<style>
+.custom-alert {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    width: 300px;
+}
 
+.custom-alert-content button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-alert-content button:hover {
+    background-color: #218838;
+}
+
+.hidden {
+    display: none;
+}
+
+.custom-alert-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+}
+</style>
 </head>
 <body>
             <%- include('nav') %>
@@ -26,28 +69,27 @@
                         <!-- Display subscription options -->
                         <div class="subscription-options">
                             <% if (fruit['3mnths'] && fruit['3mnths'] > 0) { %>
-                                <button onclick="confirmSubscription('<%- fruit._id %>', '3 Months', <%- fruit['3mnths'] %>)">
+                                <button onclick="showAlert('<%- fruit._id %>', '3 Months', <%- fruit['3mnths'] %>)">
                                     3 Months - ₹<%= fruit['3mnths'] %>/kg
                                 </button>
                                     <% } else { %>
                                 <p>No subscription option for 3 months</p>
                             <% } %>
                             <% if (fruit['6mnths']) { %>
-                                <button onclick="confirmSubscription('<%- fruit._id %>', '6 Months', <%- fruit['6mnths'] %>)">
+                                <button onclick="showAlert('<%- fruit._id %>', '6 Months', <%- fruit['6mnths'] %>)">
                                     6 Months - ₹<%= fruit['6mnths'] %>/kg
                                 </button>
                                     <% } else { %>
                                 <p>No subscription option for 6 months</p>
                             <% } %>
                             <% if (fruit['1year']) { %>
-                                <button onclick="confirmSubscription('<%- fruit._id %>', '1 Year', <%- fruit['1year'] %>)">
+                                <button onclick="showAlert('<%- fruit._id %>', '1 Year', <%- fruit['1year'] %>)">
                                     1 Year - ₹<%= fruit['1year'] %>/kg
                                 </button>
                                 <% } else { %>
                                 <p>No subscription option for 1 year</p>
                             <% } %>
                         </div>
-                        
                 </div>
             </div>
         <% }); %>
@@ -84,6 +126,13 @@
         <p>&copy; 2024 FreshMart. All rights reserved.</p>
     </div>
 </footer>
+<div id="custom-alert" class="custom-alert hidden">
+    <div class="custom-alert-content">
+        <p id="custom-alert-message"></p>
+        <button onclick="confirmAction()">Yes</button>
+        <button onclick="closeAlert()">No</button>
+    </div>
+</div>
 
 
 <script>
@@ -124,17 +173,50 @@ function selectSubscription(plan) {
   // Optionally, redirect to the order page or show a confirmation
   window.location.href = '/order'; // Example redirection to order page
 }
-function confirmSubscription(productId, duration, price) {
-    if (confirm(`Do you want to subscribe for ${duration} at ₹${price}?`)) {
-        window.location.href = `/subscription-details?productId=${productId}&duration=${duration}`;
+function showAlert(productId, duration, price) {
+    const alertBox = document.getElementById('custom-alert');
+    const alertMessage = document.getElementById('custom-alert-message');
+    
+    alertMessage.innerText = `Do you want to subscribe for ${duration} at ₹${price}?`;
+    alertBox.classList.remove('hidden');
+
+    // Store the confirmation details in a temporary variable
+    alertBox.dataset.productId = productId;
+    alertBox.dataset.duration = duration;
+    alertBox.dataset.price = price;
+
+    // Add overlay for better focus
+    const overlay = document.createElement('div');
+    overlay.className = 'custom-alert-overlay';
+    overlay.id = 'alert-overlay';
+    document.body.appendChild(overlay);
+}
+
+function closeAlert() {
+    const alertBox = document.getElementById('custom-alert');
+    alertBox.classList.add('hidden');
+
+    const overlay = document.getElementById('alert-overlay');
+    if (overlay) {
+        document.body.removeChild(overlay);
     }
+}
+
+function confirmAction() {
+    const alertBox = document.getElementById('custom-alert');
+    const { productId, duration, price } = alertBox.dataset;
+
+    // Proceed with subscription logic
+    window.location.href = `/subscription-details?productId=${productId}&duration=${duration}&price=${price}`;
+
+    // Close the alert
+    closeAlert();
 }
 
 
 // Fetch product details on page load
 window.onload = fetchProductDetails;
 </script>
-
 </body>
 </html>
 
